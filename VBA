@@ -1,0 +1,41 @@
+Option Explicit
+Sub Filling()
+    Dim i&, k%          'i为行，k为列
+    Dim r As Worksheet, w As Worksheet
+    Set r = Worksheets("党员基本信息汇总表")
+    Set w = Worksheets("卜浩宇")
+    i = 5
+'    For k = 2 To 18
+        r.Cells(i, 2) = w.Cells(3, 2) '姓名
+        r.Cells(i, 3) = w.Cells(8, 6) '党支部
+        r.Cells(i, 4) = w.Cells(4, 4) '身份证
+        r.Cells(i, 5) = w.Cells(3, 8) '性别
+        r.Cells(i, 6) = w.Cells(3, 10) '民族
+        r.Cells(i, 7) = w.Cells(5, 3) '出生日期
+        r.Cells(i, 8) = w.Cells(6, 3) '学历
+        r.Cells(i, 9) = w.Cells(7, 3) '人员类别
+        r.Cells(i, 10) = w.Cells(9, 5) '入党日期
+        r.Cells(i, 11) = w.Cells(10, 5) '转正日期
+        r.Cells(i, 12) = w.Cells(11, 3) '工作岗位
+        r.Cells(i, 13) = w.Cells(12, 5) '手机号
+        r.Cells(i, 14) = w.Cells(13, 4) & "+" & CStr(w.Cells(13, 8)) '固定电话=区号+电话
+        r.Cells(i, 15) = w.Cells(14, 6) '家庭住址
+        r.Cells(i, 16) = w.Cells(15, 4) '党籍状态
+        r.Cells(i, 17) = w.Cells(16, 4) '是否为失联党员
+        If w.Cells(16, 4) = "是" And w.Cells(16, 10) = "" Then
+            MsgBox w.Name & "为失联党员，但是没有填写失联日期"
+        End If
+        r.Cells(i, 18) = w.Cells(16, 10) '失联日期，如果不是失联可以为空，最好再加个判断语句
+        
+        r.Cells(i, 19) = w.Cells(17, 10) '是否为流动党员
+        
+        r.Cells(i, 20) = w.Cells(18, 5) '外出流向，同样需要判断
+        If w.Cells(17, 10) = "是" And w.Cells(18, 5) = "" Then
+            MsgBox w.Name & "为流动党员，但是没有填写外出流向"
+        End If
+'    Next k
+    
+End Sub
+
+
+
