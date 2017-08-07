@@ -1,0 +1,25 @@
+from docx import Document
+from tools.utils import add_hyperlink
+
+def add_hyperlink_to_table(t_idx,table,filename):
+    """
+    A function that places a hyperlink within a cell object.
+
+    :param table: The table we are adding the hyperlink to.
+    :param t_idx: A flat to trace sheet's number
+    :param filename: The text displayed for the excel
+    :return: The hyperlink object
+    """
+    hyperlink = add_hyperlink(table.rows[0].cells[0].paragraphs[0], filename+"#Sheet{}!A1".format(t_idx),"Trace to sheet{}".format(t_idx), 'FF8822', False)
+    return hyperlink
+
+def link_docx_excel(docx_location, filename):
+    wordDoc = Document(docx_location)
+    tables = wordDoc.tables
+    for t_idx, table in enumerate(tables):
+        add_hyperlink_to_table(t_idx,table,filename)
+    wordDoc.save(docx_location)
+
+
+# <---------    example:    --------->
+link_docx_excel("../docx/test.docx","../xls/22.xlsx")
